@@ -2,7 +2,7 @@ import Config
 
 # Configure your database
 config :truckcheck, Truckcheck.Repo,
-  username: "postgres",
+  username: "sjm",
   password: "postgres",
   hostname: "localhost",
   database: "truckcheck_dev",
