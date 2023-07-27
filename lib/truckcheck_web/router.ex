@@ -68,6 +68,13 @@ defmodule TruckcheckWeb.Router do
       on_mount: [{TruckcheckWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
       live "/users/settings/confirm_email/:token", UserSettingsLive, :confirm_email
+
+      live "/addresses", AddressLive.Index, :index
+      live "/addresses/new", AddressLive.Index, :new
+      live "/addresses/:id/edit", AddressLive.Index, :edit
+
+      live "/addresses/:id", AddressLive.Show, :show
+      live "/addresses/:id/show/edit", AddressLive.Show, :edit
     end
   end
 

@@ -1,0 +1,44 @@
+<.header>
+  Listing Addresses
+  <:actions>
+    <.link patch={~p"/addresses/new"}>
+      <.button>New Address</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="addresses"
+  rows={@streams.addresses}
+  row_click={fn {_id, address} -> JS.navigate(~p"/addresses/#{address}") end}
+>
+  <:col :let={{_id, address}} label="Street"><%= address.street %></:col>
+  <:col :let={{_id, address}} label="House number"><%= address.house_number %></:col>
+  <:col :let={{_id, address}} label="Zip code"><%= address.zip_code %></:col>
+  <:col :let={{_id, address}} label="City"><%= address.city %></:col>
+  <:action :let={{_id, address}}>
+    <div class="sr-only">
+      <.link navigate={~p"/addresses/#{address}"}>Show</.link>
+    </div>
+    <.link patch={~p"/addresses/#{address}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, address}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: address.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="address-modal" show on_cancel={JS.patch(~p"/addresses")}>
+  <.live_component
+    module={TruckcheckWeb.AddressLive.FormComponent}
+    id={@address.id || :new}
+    title={@page_title}
+    action={@live_action}
+    address={@address}
+    patch={~p"/addresses"}
+  />
+</.modal>
