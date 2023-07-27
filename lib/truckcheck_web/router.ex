@@ -75,6 +75,20 @@ defmodule TruckcheckWeb.Router do
 
       live "/addresses/:id", AddressLive.Show, :show
       live "/addresses/:id/show/edit", AddressLive.Show, :edit
+      
+      live "/vehicles", VehicleLive.Index, :index
+      live "/vehicles/new", VehicleLive.Index, :new
+      live "/vehicles/:id/edit", VehicleLive.Index, :edit
+      
+      live "/vehicles/:id", VehicleLive.Show, :show
+      live "/vehicles/:id/show/edit", VehicleLive.Show, :edit      
+
+      live "/customers", CustomerLive.Index, :index
+      live "/customers/new", CustomerLive.Index, :new
+      live "/customers/:id/edit", CustomerLive.Index, :edit
+
+      live "/customers/:id", CustomerLive.Show, :show
+      live "/customers/:id/show/edit", CustomerLive.Show, :edit
     end
   end
 
